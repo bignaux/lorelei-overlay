@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<layman>
+	<overlay
+		type = "git"
+		src  = "git://github.com/bignaux/lorelei-overlay.git"
+		contact = "ronan@aimao.org"
+		status  = "unofficial"
+		name = "lorelei">
+		<link>
+			http://github.com/bignaux/lorelei-overlay
+		</link>
+		<description>
+			A public gentoo overlay to pre-release ebuild for our projects
+		</description>
+	</overlay>
+</layman>
+
