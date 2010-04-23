@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="A flexible, IPv6 layer 3 VPN daemon"
 HOMEPAGE="http://www.vpzone.org/"
-SRC_URI="http://www.vpzone.org/files/${P}.tar.bz2"
+SRC_URI="http://downloads.sourceforge.net/project/${PN}/${P}.tar.bz2"
 
 LICENSE="GPLv3"
 SLOT="0"
@@ -16,7 +16,9 @@ KEYWORDS="~x86 ~amd64"
 IUSE="debug"
 
 DEPEND="=dev-libs/libevent-1.4*
-		net-misc/babeld"
+		>=net-dns/c-ares-1.4
+		net-misc/babeld
+		net-libs/gnutls"
 
 src_configure() {
 
@@ -36,7 +38,7 @@ src_install() {
 
 	find "${D}" -name '*.la' -delete
 
-	dodoc CHANGES README || die "dodoc failed"
+	dodoc Changelog README || die "dodoc failed"
 
 	doman doc/${PN}.8 || die "doman failed"
 	doman doc/${PN}.conf.8 || die "doman failed"
