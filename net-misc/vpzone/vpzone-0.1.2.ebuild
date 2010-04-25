@@ -43,4 +43,29 @@ src_install() {
 	doman doc/${PN}.8 || die "doman failed"
 	doman doc/${PN}.conf.8 || die "doman failed"
 
+	# Empty dir
+	dodir /etc/vpzone
+	keepdir /etc/vpzone
+
+	# Install the init script 
+	newinitd "${FILESDIR}/${PN}.init" vpzone
+
 }
+
+pkg_postinst() {
+	einfo "The vpzone init script expects to find the configuration file"
+	einfo "vpzone.conf in /etc/vpzone along with any extra files it may need."
+	einfo ""
+	einfo "To create more VPNs, simply create a new .conf file for it and"
+	einfo "then create a symlink to the vpzone init script from a link called"
+	einfo "vpzone.newconfname - like so"
+	einfo "   cd /etc/vpzone"
+	einfo "   ${EDITOR##*/} foo.conf"
+	einfo "   cd /etc/init.d"
+	einfo "   ln -s vpzone vpzone.foo"
+	einfo ""
+	einfo "You can then treat vpzone.foo as any other service, so you can"
+	einfo "stop one vpn and start another if you need to."
+}
+
+
