@@ -20,7 +20,8 @@ src_compile() {
 }
 
 src_install(){
-	emake install.minimal PREFIX=/usr "TARGET=${D}" || die "install failed"
+	exeinto /usr/sbin
+	doexe babeld || die "install failed"
 	dodoc CHANGES README || die "dodoc failed"
 	mv ${PN}.man ${PN}.8
 	doman ${PN}.8 || die "doman failed"
