@@ -20,6 +20,11 @@ DEPEND="=dev-libs/libevent-1.4*
 		net-misc/babeld
 		net-libs/gnutls"
 
+pkg_setup() {
+
+	enewgroup vpzone
+
+}
 src_configure() {
 
 	econf $(use_enable debug) --prefix=/usr || die "Configure failed"
@@ -50,6 +55,13 @@ src_install() {
 	# Install the init script 
 	newinitd "${FILESDIR}/${PN}.init" vpzone
 
+	keepdir /var/run/vpzone/
+	fperms 0750 /var/run/vpzone/
+	fowners root:vpzone /var/run/vpzone/
+
+	keepdir /var/log/vpzone/
+	fperms 0750 /var/log/vpzone/
+	fowners root:vpzone /var/log/vpzone/
 }
 
 pkg_postinst() {
@@ -66,6 +78,8 @@ pkg_postinst() {
 	einfo ""
 	einfo "You can then treat vpzone.foo as any other service, so you can"
 	einfo "stop one vpn and start another if you need to."
+	einfo "To run as non-root, add yourself to the vpzone group:"
+	einfo "   gpasswd -a <user> vpzone"
 }
 
 

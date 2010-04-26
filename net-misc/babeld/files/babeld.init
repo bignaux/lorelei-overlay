@@ -1,0 +1,53 @@
+#!/sbin/runscript
+# Copyright 1999-2007 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# Ronan Bignaux 2010
+
+BABELDDIR=${BABELDDIR:-/etc/babeld}
+BABELD=${SVCNAME#*.}
+BABELDCONF="${BABELDDIR}/${BABELD}.conf"
+BABELDPID=${BABELDPID:-/var/run/babeld/${BABELD}.pid}
+
+# Check for OpenRC/Baselayout 2 - see bug #270646
+is_openrc() {
+    [ -f /lib/librc.so -o -f /etc/init.d/sysfs -o -f /lib/rc/version ]
+}
+
+start() {
+	if is_openrc; then
+		BABELDLOG=${BABELDLOG:-/var/log/babeld/${BABELD}.log}
+		logfile_opt=""
+		if [ -n "${BABELDLOG}" ]; then
+			logfile_opt="--stdout ${BABELDLOG} --stderr ${BABELDLOG}"
+		fi	
+	else 
+		logopt="-L ${BABELDLOG}"
+	fi
+	
+	NETINT=$(grep --word-regexp interface "${BABELDCONF}" | cut -d' ' -f 2)
+	if [ ! -n "${NETINT}" ]; then
+		NETINT=${BABELD}
+		# use logopt expansion instead
+		INT=${NETINT}
+	fi
+	
+	dev=$(grep --word-regex ${NETINT} /proc/net/dev)
+	if [ ! -n "${dev}" ]; then
+		eerror "interface ${NETINT} doesn't exist"
+		return 1
+	fi
+	
+	ebegin "Starting ${SVCNAME}"
+	# bug : log remains empty
+	start-stop-daemon --start  --background ${logfile_opt} --exec /usr/sbin/babeld -- \
+			 -c "${BABELDCONF}" -I "${BABELDPID}" ${logopt} ${INT}	
+	eend $? "Check your logs to see why startup failed"
+}
+
+
+stop() {
+	ebegin "Stopping ${SVCNAME}"
+	start-stop-daemon --stop --quiet --pidfile "${BABELDPID}"
+	eend $?	
+}
+# vim: set ts=4 :
