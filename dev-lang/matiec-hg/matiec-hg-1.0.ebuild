@@ -26,18 +26,11 @@ src_unpack() {
 
 	EHG_REPO_URI="${EHG_REPO_URI_BASE}/matiec"
 	mercurial_src_unpack
-
 }
 
-src_compile() {
-
-	cd "${WORKDIR}/matiec"
-	emake || die
-}
+S="${WORKDIR}/matiec"
 
 src_install() {
-
-	cd "${WORKDIR}/matiec"
 	exeinto /usr/bin
 	doexe iec2c iec2iec || die "install failed"
 }

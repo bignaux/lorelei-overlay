@@ -1,6 +1,7 @@
-# Copyright 1999-2009 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# Distributed under the terms of the GNU General Public License v3
+# Author : Ronan Bignaux
+# Todo : check dependancies , add use : doc examples and custom conf for drivers
+# move /usr/objdictgen/ and clean it from gnosis-utils
 
 EAPI="2"
 
@@ -15,10 +16,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPENDS="sys-devel/bison
-	sys-devel/flex"
-RDEPEND="${DEPEND}"
-
 src_unpack() {
 	if [ -n "$NOFETCH" ]; then
 		EHG_PULL_CMD=/bin/true
@@ -30,14 +27,16 @@ src_unpack() {
 }
 
 S="${WORKDIR}/CanFestival-3"
+src_prepare(){
+	mv Makefile.in Makefile.in.tmp
+	sed "/ldconfig/d" Makefile.in.tmp > Makefile.in
+}
 
-src_compile() {
-    # it's a custom configure , dont works with econf
-    einfo "je fais de la merde"
-    sh configure
-    make || die
+src_configure(){
+	# it's a custom configure , dont works with econf
+	sh configure --prefix="${D}/usr/"
 }
 
 src_install() {
-    make install || die
+	make install || die
 }
