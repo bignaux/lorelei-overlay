@@ -13,7 +13,10 @@ EHG_REPO_URI_BASE="http://lolitech.fr/dev"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="doc"
+
+DEPENDS="dev-python/gnosis-utils
+	dev-python/wxpython"
 
 src_unpack() {
 	if [ -n "$NOFETCH" ]; then
@@ -21,21 +24,31 @@ src_unpack() {
 		EHG_CLONE_CMD=/bin/true
 	fi
 
-	EHG_REPO_URI="${EHG_REPO_URI_BASE}/CanFestival-3"
+	EHG_REPO_URI="${EHG_REPO_URI_BASE}/CanFestival-3/objdictgen"
 	mercurial_src_unpack
 }
 
-S="${WORKDIR}/CanFestival-3"
-src_prepare(){
-	sed -i '/ldconfig/d' Makefile.in
-	sed -i '/objdictgen/d' Makefile.in
-}
+DEST="/usr/share/objdictgen"
+S="${WORKDIR}/objdictgen/objdictgen"
 
-src_configure(){
-	# it's a custom configure , dont works with econf
-	sh configure --prefix="${D}/usr/"
+src_prepare(){
+	rm Gnosis_Utils-current.tar.gz
+	rm -fr gnosis
+	rm Makefile*
 }
 
 src_install() {
-	make install || die
+	dodir ${DEST}
+	insinto ${DEST}
+	doins -r *
+
+	fperms 755 ${DEST}/objdictedit.py
+	dosym ${DEST}/objdictedit.py /usr/bin/objdictedit
+
+	fperms 755 ${DEST}/objdictgen.py
+	dosym ${DEST}/objdictgen.py /usr/bin/objdictgen
+
+	if use doc; then
+		dohtml -r doc/*
+	fi
 }
