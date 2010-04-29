@@ -11,7 +11,7 @@ DESCRIPTION="a library implementing an XSD schema based model for MVC generator.
 HOMEPAGE="http://www.beremiz.org/"
 EHG_REPO_URI_BASE="http://lolitech.fr/dev"
 
-LICENSE="GPLv2"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc"

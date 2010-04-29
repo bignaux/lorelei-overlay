@@ -10,7 +10,7 @@ DESCRIPTION="A flexible, IPv6 layer 3 VPN daemon"
 HOMEPAGE="http://www.vpzone.org/"
 SRC_URI="http://downloads.sourceforge.net/project/${PN}/${P}.tar.bz2"
 
-LICENSE="GPLv3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE="debug"

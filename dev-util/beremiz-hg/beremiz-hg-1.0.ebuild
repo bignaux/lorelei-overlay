@@ -12,7 +12,7 @@ DESCRIPTION="Open Source framework for automation"
 HOMEPAGE="http://www.beremiz.org/"
 EHG_REPO_URI_BASE="http://lolitech.fr/dev"
 
-LICENSE="GPLv2"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc"
