@@ -1,7 +1,7 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-# Ronan Bignaux 
+# Ronan Bignaux
 
 EAPI="2"
 
@@ -26,7 +26,7 @@ src_unpack() {
 		EHG_PULL_CMD=/bin/true
 		EHG_CLONE_CMD=/bin/true
 	fi
-	
+
 	EHG_REPO_URI="${EHG_REPO_URI_BASE}/docutils"
 	mercurial_src_unpack
 }
@@ -36,5 +36,3 @@ src_install() {
 	insinto ${DEST}
 	doins -r *.py
 }
-
-

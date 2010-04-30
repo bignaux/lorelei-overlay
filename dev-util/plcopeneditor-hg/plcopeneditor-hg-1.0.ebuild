@@ -38,7 +38,7 @@ src_unpack() {
 		EHG_PULL_CMD=/bin/true
 		EHG_CLONE_CMD=/bin/true
 	fi
-	
+
 	EHG_REPO_URI="${EHG_REPO_URI_BASE}/plcopeneditor"
 	mercurial_src_unpack
 }
@@ -47,7 +47,7 @@ src_install() {
 	dodir ${DEST}
 	insinto ${DEST}
 	doins -r *
-	
+
 	insinto /usr/share/applications
 	doins "${S}"/debian/plcopeneditor.desktop
 
@@ -58,5 +58,3 @@ src_install() {
 		dohtml -r doc/*
 	fi
 }
-
-

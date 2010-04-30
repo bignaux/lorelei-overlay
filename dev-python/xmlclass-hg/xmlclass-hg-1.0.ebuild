@@ -40,4 +40,3 @@ src_install() {
 		dohtml -r docs/*
 	fi
 }
-

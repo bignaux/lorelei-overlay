@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit eutils mercurial autotools toolchain-funcs
+inherit eutils mercurial toolchain-funcs
 
 DESCRIPTION="a IEC 61131-3 compiler"
 HOMEPAGE="http://www.beremiz.org/"

@@ -31,7 +31,7 @@ src_install(){
 	keepdir /etc/babeld
 	insinto /etc/babeld ; doins "${FILESDIR}/${PN}.conf"
 
-	# Install the init script 
+	# Install the init script
 	newinitd "${FILESDIR}/${PN}.init" babeld
 
 	keepdir /var/run/babeld/

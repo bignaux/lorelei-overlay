@@ -52,7 +52,7 @@ src_install() {
 	dodir /etc/vpzone
 	keepdir /etc/vpzone
 
-	# Install the init script 
+	# Install the init script
 	newinitd "${FILESDIR}/${PN}.init" vpzone
 
 	keepdir /var/run/vpzone/
@@ -81,5 +81,3 @@ pkg_postinst() {
 	einfo "To run as non-root, add yourself to the vpzone group:"
 	einfo "   gpasswd -a <user> vpzone"
 }
-
-

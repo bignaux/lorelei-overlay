@@ -1,6 +1,6 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $ 
+# $Header: $
 # TODO : find a trick for docutils ( this lib should be renamed to avoid name conflict )
 # * don't rely on canfestival ( USE )
 
@@ -40,7 +40,7 @@ src_unpack() {
 		EHG_PULL_CMD=/bin/true
 		EHG_CLONE_CMD=/bin/true
 	fi
-	
+
 	EHG_REPO_URI="${EHG_REPO_URI_BASE}/beremiz"
 	mercurial_src_unpack
 }
@@ -49,16 +49,14 @@ src_install() {
 	dodir ${DEST}
 	insinto ${DEST}
 	doins -r *
-	
+
 	insinto /usr/share/applications
 	doins "${S}"/debian/{beremiz{_doc,_svgui,_wxglade},beremiz}.desktop
 
-	fperms 755 ${DEST}/Beremiz.py 
+	fperms 755 ${DEST}/Beremiz.py
 	dosym ${DEST}/Beremiz.py /usr/bin/beremiz
 
 	if use doc; then
 		dohtml -r doc/*
 	fi
 }
-
-
