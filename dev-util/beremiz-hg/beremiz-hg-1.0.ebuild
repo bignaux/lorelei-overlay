@@ -1,6 +1,7 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
 # TODO : find a trick for docutils ( this lib should be renamed to avoid name conflict )
 # * don't rely on canfestival ( USE )
 

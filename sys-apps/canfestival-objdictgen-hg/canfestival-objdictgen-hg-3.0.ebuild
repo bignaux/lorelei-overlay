@@ -1,5 +1,7 @@
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# Author : Ronan Bignaux
+# $Header: $
+
 # Todo : check dependancies , add use : doc examples and custom conf for drivers
 
 EAPI="2"
