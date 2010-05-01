@@ -9,4 +9,4 @@ dev-python/xmlclass-hg
 dev-util/beremiz-hg
 dev-util/plcopeneditor-hg
 sys-apps/canfestival-hg
-canfestival-objdictgen-hg
+sys-apps/canfestival-objdictgen-hg
