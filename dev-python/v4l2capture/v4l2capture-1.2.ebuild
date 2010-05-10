@@ -13,10 +13,18 @@ SRC_URI="http://fredrik.jemla.eu/v4l2capture-1.2.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc"
+IUSE="examples"
 
 DEPEND="${RDEPEND}
 	dev-python/setuptools"
 RESTRICT_PYTHON_ABIS="3.*"
 
-# PYTHON_MODNAME="${MY_P/-/_}"
+src_install() {
+	distutils_src_install
+
+	if use examples; then
+		insinto /usr/share/doc/${PF}/examples
+		doins -r *.py || die
+	fi
+
+}
