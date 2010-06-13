@@ -1,0 +1,283 @@
+diff -r -u --exclude=.svn pyrobot/brain/psom/csom_src/makefile pyrobot-x86_64/brain/psom/csom_src/makefile
+--- pyrobot/brain/psom/csom_src/makefile	2009-02-26 09:18:29.647908569 +0200
++++ pyrobot-x86_64/brain/psom/csom_src/makefile	2009-02-25 13:34:27.085012794 +0200
+@@ -26,7 +26,7 @@
+ #statically linked one. -- WKV 2003-07-28
+ #LD=ld
+ LD=$(CC)
+-CC_FLAGS=-c -g -I $(PYTHON_INCLUDE)
++CC_FLAGS=-fPIC -c -g -I $(PYTHON_INCLUDE)
+ SWIG_FLAGS=-python
+ LD_FLAGS=-shared
+ 
+diff -r -u --exclude=.svn pyrobot/brain/psom/csom_src/som_pak-dev/makefile pyrobot-x86_64/brain/psom/csom_src/som_pak-dev/makefile
+--- pyrobot/brain/psom/csom_src/som_pak-dev/makefile	2009-02-26 09:18:29.621241021 +0200
++++ pyrobot-x86_64/brain/psom/csom_src/som_pak-dev/makefile	2009-02-25 13:33:44.331683857 +0200
+@@ -2,7 +2,7 @@
+ include ../../../../Makefile.src
+ 
+ CC=cc
+-CFLAGS=-O $(PYTHON_INCLUDE)
++CFLAGS=-fPIC -O $(PYTHON_INCLUDE)
+ LDFLAGS=-s
+ LDLIBS=-lm
+ LD=$(CC)
+diff -r -u --exclude=.svn pyrobot/camera/aibo/Makefile pyrobot-x86_64/camera/aibo/Makefile
+--- pyrobot/camera/aibo/Makefile	2009-02-26 09:18:28.437937447 +0200
++++ pyrobot-x86_64/camera/aibo/Makefile	2009-02-25 13:25:40.411763397 +0200
+@@ -9,6 +9,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) $(INCLUDE)
+ 
+ LIBDIRS= 
+@@ -21,10 +22,10 @@
+ 	$(CC) $(CPPFLAGS) -shared aibo.o Aibo.o Socket.o jpeg.o RWLock.o ../device/Device.o $(LIBDIRS) -o $@ $(LIBS)
+ 
+ RWLock.o: RWLock.cpp RWLock.h
+-	$(CC) RWLock.cpp -c
++	$(CC) $(CPPFLAGS) RWLock.cpp -c
+ 
+ jpeg.o: jpeg.c jpeg.h
+-	$(CC) jpeg.c -c
++	$(CC) $(CPPFLAGS) jpeg.c -c
+ 
+ Aibo.o: Aibo.cpp Aibo.h ../device/Device.o
+ 	$(CC) $(CPPFLAGS) -o $@ -c Aibo.cpp
+@@ -33,10 +34,10 @@
+ 	swig -python -c++ $(INCLUDE) -o Aibo.cc Aibo.i
+ 
+ aibo.o: Aibo.cc 
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) Aibo.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) Aibo.cc -o $@
+ 
+ Socket.o: Socket.cpp Socket.h
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) Socket.cpp -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) Socket.cpp -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o Aibo.cc aibo.py
+diff -r -u --exclude=.svn pyrobot/camera/blob/Makefile pyrobot-x86_64/camera/blob/Makefile
+--- pyrobot/camera/blob/Makefile	2009-02-26 09:18:28.537911160 +0200
++++ pyrobot-x86_64/camera/blob/Makefile	2009-02-25 13:26:02.781798739 +0200
+@@ -9,6 +9,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) $(INCLUDE)
+ 
+ LIBDIRS= 
+@@ -27,7 +28,7 @@
+ 	swig -python -c++ $(INCLUDE) -o Blob.cc Blob.i
+ 
+ blob.o: Blob.cc 
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) Blob.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) Blob.cc -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o Blob.cc blob.py
+diff -r -u --exclude=.svn pyrobot/camera/bt848/Makefile pyrobot-x86_64/camera/bt848/Makefile
+--- pyrobot/camera/bt848/Makefile	2009-02-26 09:18:28.344605882 +0200
++++ pyrobot-x86_64/camera/bt848/Makefile	2009-02-25 13:26:27.252560274 +0200
+@@ -9,6 +9,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE)
+ 
+ LIBDIRS= 
+@@ -24,7 +25,7 @@
+ 	swig -python $(INCLUDE) -c++ -o $@ BT848.i
+ 
+ bt848.o: BT848.cc ../device/Device.o
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) BT848.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) BT848.cc -o $@
+ 
+ clean::
+ 	$(RM) *~ BT848.cc bt848.py bt848.cc bt848grab *.so *.o
+diff -r -u --exclude=.svn pyrobot/camera/device/Makefile pyrobot-x86_64/camera/device/Makefile
+--- pyrobot/camera/device/Makefile	2009-02-26 09:18:27.707908658 +0200
++++ pyrobot-x86_64/camera/device/Makefile	2009-02-25 13:27:31.295084992 +0200
+@@ -9,8 +9,12 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) -shared
+ 
++Device.o:: Device.cpp Device.h
++	$(CC) $(CPPFLAGS) -o $@ -c $<
++
+ clean::
+ 	$(RM) *~ *.so *.o
+ 
+diff -r -u --exclude=.svn pyrobot/camera/fake/Makefile pyrobot-x86_64/camera/fake/Makefile
+--- pyrobot/camera/fake/Makefile	2009-02-26 09:18:28.264583892 +0200
++++ pyrobot-x86_64/camera/fake/Makefile	2009-02-25 13:27:57.255888538 +0200
+@@ -9,6 +9,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) $(INCLUDE)
+ 
+ LIBS= -lstdc++ -ldl -lpthread
+@@ -26,7 +27,7 @@
+ 	swig -python -c++ $(INCLUDE) -o Fake.cc Fake.i
+ 
+ fake.o: Fake.cc 
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) Fake.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) Fake.cc -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o fake.py Fake.cc
+diff -r -u --exclude=.svn pyrobot/camera/fourway/Makefile pyrobot-x86_64/camera/fourway/Makefile
+--- pyrobot/camera/fourway/Makefile	2009-02-26 09:18:28.477941179 +0200
++++ pyrobot-x86_64/camera/fourway/Makefile	2009-02-25 13:28:13.678383252 +0200
+@@ -9,6 +9,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) $(INCLUDE)
+ 
+ LIBS= -lstdc++ -ldl -lpthread
+@@ -26,7 +27,7 @@
+ 	swig -python -c++ $(INCLUDE) -o Fourway.cc Fourway.i
+ 
+ fourway.o: Fourway.cc 
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) Fourway.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) Fourway.cc -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o fourway.py Fourway.cc
+diff -r -u --exclude=.svn pyrobot/camera/player/Makefile pyrobot-x86_64/camera/player/Makefile
+--- pyrobot/camera/player/Makefile	2009-02-26 09:18:28.511271826 +0200
++++ pyrobot-x86_64/camera/player/Makefile	2009-02-25 13:28:27.741744787 +0200
+@@ -9,6 +9,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) $(INCLUDE)
+ 
+ LIBS= -lstdc++ -ldl -L/usr/local/lib -L/usr/lib -lpthread -lplayerc -ljpeg  
+@@ -26,7 +27,7 @@
+ 	swig -python -c++ $(INCLUDE) -o PlayerCam.cc PlayerCam.i
+ 
+ playercam.o: PlayerCam.cc 
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) PlayerCam.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) PlayerCam.cc -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o PlayerCam.cc playercam.py
+diff -r -u --exclude=.svn pyrobot/camera/robocup/Makefile pyrobot-x86_64/camera/robocup/Makefile
+--- pyrobot/camera/robocup/Makefile	2009-02-26 09:18:28.374605258 +0200
++++ pyrobot-x86_64/camera/robocup/Makefile	2009-02-25 13:28:39.588409881 +0200
+@@ -9,6 +9,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) $(INCLUDE)
+ 
+ LIBDIRS= 
+@@ -27,7 +28,7 @@
+ 	swig -python -c++ $(INCLUDE) -o Robocup.cc Robocup.i
+ 
+ robocup.o: Robocup.cc 
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) Robocup.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) Robocup.cc -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o Robocup.cc robocup.py
+diff -r -u --exclude=.svn pyrobot/camera/robocup/Robocup.cpp pyrobot-x86_64/camera/robocup/Robocup.cpp
+--- pyrobot/camera/robocup/Robocup.cpp	2009-02-26 09:18:28.374605258 +0200
++++ pyrobot-x86_64/camera/robocup/Robocup.cpp	2009-02-26 09:17:32.768747270 +0200
+@@ -96,7 +96,8 @@
+   // ]
+   // draw points
+   PyObject *key, *value;
+-  int next = 0;
++  /*int next = 0;*/
++  Py_ssize_t next = 0;
+   int lastX, lastY;
+   while (PyDict_Next(points, &next, &key, &value)) { // for each line
+     // key is the name of the line
+diff -r -u --exclude=.svn pyrobot/camera/stereo/Makefile pyrobot-x86_64/camera/stereo/Makefile
+--- pyrobot/camera/stereo/Makefile	2009-02-26 09:18:27.911273393 +0200
++++ pyrobot-x86_64/camera/stereo/Makefile	2009-02-25 13:28:55.465049544 +0200
+@@ -10,6 +10,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) $(INCLUDE)
+ 
+ LIBS= -lstdc++ -ldl -lpthread
+@@ -27,7 +28,7 @@
+ 	swig -python -c++ $(INCLUDE) -o Stereo.cc Stereo.i
+ 
+ stereo.o: Stereo.cc 
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) Stereo.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) Stereo.cc -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o stereo.py Stereo.cc p2p
+diff -r -u --exclude=.svn pyrobot/camera/v4l/Makefile pyrobot-x86_64/camera/v4l/Makefile
+--- pyrobot/camera/v4l/Makefile	2009-02-26 09:18:28.198750091 +0200
++++ pyrobot-x86_64/camera/v4l/Makefile	2009-02-25 13:29:16.915075732 +0200
+@@ -10,6 +10,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE)
+ 
+ LIBDIRS= 
+@@ -25,7 +26,7 @@
+ 	swig -python $(INCLUDE) -c++ -o $@ V4L.i
+ 
+ v4l.o: V4L.cc ../device/Device.o
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) V4L.cc -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) V4L.cc -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o v4l.py V4L.cc 
+diff -r -u --exclude=.svn pyrobot/camera/v4l/V4L.cpp pyrobot-x86_64/camera/v4l/V4L.cpp
+--- pyrobot/camera/v4l/V4L.cpp	2009-02-26 09:18:28.195439144 +0200
++++ pyrobot-x86_64/camera/v4l/V4L.cpp	2009-02-26 09:14:59.984630372 +0200
+@@ -136,7 +136,8 @@
+ 				MAP_SHARED, 
+ 				grab_fd, 
+ 				0); 
+-  if ((int)image == -1) {
++  /*if ((int)image == -1) {*/
++  if ((void *)image == (void *) MAP_FAILED) {
+     fprintf(stderr,"Error ");
+     perror("mmap");
+     exit(1);
+diff -r -u --exclude=.svn pyrobot/vision/cvision/Makefile pyrobot-x86_64/vision/cvision/Makefile
+--- pyrobot/vision/cvision/Makefile	2009-02-26 09:18:45.081240092 +0200
++++ pyrobot-x86_64/vision/cvision/Makefile	2009-02-25 13:30:08.515037931 +0200
+@@ -10,6 +10,7 @@
+ 	-D_REENTRANT -DPOSIX \
+ 	-D__x86__ -D__linux__ \
+ 	-D__OSVERSION__=2 -frepo -DUSINGTHREADS -DLINUX -D_GNU_SOURCE \
++	-fPIC \
+ 	$(PYTHON_INCLUDE) $(INCLUDE)
+ 
+ LIBS= -lstdc++ -ldl -lpthread
+@@ -24,7 +25,7 @@
+ 	swig $(INCLUDE) -python -c++ -o $@ Vision.i
+ 
+ vision.o: Vision.cc
+-	$(CC) -c $(PYTHON_INCLUDE) $(INCLUDE) $^ -o $@
++	$(CC) $(CPPFLAGS) -c $(PYTHON_INCLUDE) $(INCLUDE) $^ -o $@
+ 
+ clean::
+ 	$(RM) *~ *.so *.o *.cc *.so *.pyc vision.py
