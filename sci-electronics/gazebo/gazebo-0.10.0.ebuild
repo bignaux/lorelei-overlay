@@ -15,23 +15,25 @@ SLOT="0"
 RDEPEND="
 	virtual/opengl
 	virtual/glut
-	>=dev-games/ode-0.039
 	>=sci-electronics/player-2.0
-	dev-libs/libxml2
-	>=x11-libs/fltk-1.1:1.1
 	zlib? ( sys-libs/zlib )
 	python? ( dev-lang/python )
 	3ds? ( media-libs/lib3ds )
 	proj? ( sci-libs/proj )
 	gdal? ( sci-libs/gdal )
-	ogre? ( dev-games/ogre )
 	bullet? ( sci-physics/bullet )"
 
 DEPEND="${RDEPEND}
-	media-libs/freeimage
-	>=dev-libs/boost-1.35.0-r1
-	>=dev-util/pkgconfig-0.9.0
-	python? ( dev-lang/swig )"
+	media-libs/assimp
+	x11-libs/fltk
+	>=dev-games/ogre-1.6.5
+	dev-games/ode
+	dev-games/ois
+	dev-libs/libxml2"
+	#media-libs/freeimage
+	#>=dev-libs/boost-1.35.0-r1
+	#>=dev-util/pkgconfig-0.9.0
+	#python? ( dev-lang/swig )"
 
 IUSE_MODELS="models_avatarheli models_blimp models_clodbuster models_carchassis
 		models_factory models_garmingps models_groundplane models_lightsource
@@ -41,4 +43,4 @@ IUSE_MODELS="models_avatarheli models_blimp models_clodbuster models_carchassis
 		models_canonvcc4 models_stereohead models_truthwidget models_wheelchair
 		models_b21r models_atrv models_bandit models_road models_terrain"
 
-IUSE="bullet ogre python wxwindows 3ds proj gdal zlib $IUSE_MODELS"
+IUSE="bullet python wxwindows 3ds proj gdal zlib $IUSE_MODELS"
