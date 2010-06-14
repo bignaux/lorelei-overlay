@@ -1,0 +1,15 @@
+--- gazebo-0.10.0/server/AssimpLoader.hh	2010-01-13 22:58:33.000000000 +0100
++++ gazebo-0.10.0.assimp/server/AssimpLoader.hh	2010-06-15 01:05:22.921692790 +0200
+@@ -3,9 +3,9 @@
+ 
+ #include <string>
+ 
+-#include <assimp.hpp>
+-#include <aiScene.h>
+-#include <aiPostProcess.h>
++#include <assimp/assimp.hpp>
++#include <assimp/aiScene.h>
++#include <assimp/aiPostProcess.h>
+ 
+ #include "MeshLoader.hh"
+ 
