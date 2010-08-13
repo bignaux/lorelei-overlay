@@ -44,12 +44,20 @@ IUSE_MODELS="models_avatarheli models_blimp models_clodbuster models_carchassis
 		models_canonvcc4 models_stereohead models_truthwidget models_wheelchair
 		models_b21r models_atrv models_bandit models_road models_terrain"
 
-IUSE="bullet python wxwindows 3ds proj gdal zlib"
+IUSE="bullet debug python wxwindows 3ds proj gdal zlib"
 # $IUSE_MODELS"
 
-mycmakeargs="-Dassimp_include_dir:PATH=/usr/include/assimp"
 src_unpack()
 {
 	unpack ${A}
 	epatch "${FILESDIR}/assimploader-header-fix.patch"
+}
+
+src_configure() {
+    local mycmakeargs=(
+		-Dassimp_include_dir:PATH=/usr/include/assimp
+		$(cmake-utils_use debug) )
+	# -DUSE_QT_WEBKIT=ON"
+
+    cmake-utils_src_configure
 }
