@@ -2,8 +2,6 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-# TODO : theme not available , keymap , kernel event dependancie.
-
 EAPI="2"
 
 inherit eutils distutils
@@ -20,4 +18,7 @@ IUSE=""
 DEPEND="${RDEPEND}
 	dev-python/setuptools
 	dev-python/pygtk
-	dev-python/dbus-python"
+	dev-python/dbus-python
+	dev-python/python-xlib
+	x11-proto/recordproto
+	dev-python/librsvg-python"
