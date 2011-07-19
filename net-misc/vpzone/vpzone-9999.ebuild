@@ -4,15 +4,15 @@
 
 EAPI="2"
 
-inherit eutils
+inherit eutils mercurial
 
 DESCRIPTION="A flexible, IPv6 layer 3 VPN daemon"
 HOMEPAGE="http://www.vpzone.org/"
-SRC_URI="http://downloads.sourceforge.net/project/${PN}/${P}.tar.bz2"
+EHG_REPO_URI="http://vpzone.hg.sourceforge.net/hgweb/vpzone/vpzone/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 IUSE="debug"
 
 DEPEND="dev-libs/libevent
@@ -20,11 +20,18 @@ DEPEND="dev-libs/libevent
 		net-misc/babeld
 		net-libs/gnutls"
 
+EHG_PROJECT="vpzone"
+
+src_prepare() {
+	./autogen.sh || die "autogen.sh failed"
+}
+
 pkg_setup() {
 
 	enewgroup vpzone
 
 }
+
 src_configure() {
 
 	econf $(use_enable debug) --prefix=/usr || die "Configure failed"
@@ -53,7 +60,7 @@ src_install() {
 	keepdir /etc/vpzone
 
 	# Install the init script
-	newinitd "${FILESDIR}/${PN}.init" vpzone
+	#newinitd "${FILESDIR}/${PN}.init" vpzone
 
 	keepdir /var/run/vpzone/
 	fperms 0750 /var/run/vpzone/
