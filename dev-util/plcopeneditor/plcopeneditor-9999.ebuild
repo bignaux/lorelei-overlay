@@ -25,7 +25,7 @@ RDEPEND="dev-python/gnosis-utils
 		dev-python/nevow
 		dev-python/simplejson
 		dev-util/wxglade
-		dev-python/pyro
+		dev-python/pyro:3
 		sys-apps/canfestival
 		dev-lang/matiec
 		dev-python/xmlclass
