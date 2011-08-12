@@ -2,14 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="3"
 
 inherit eutils mercurial distutils
 MY_P="xmlclass"
 
 DESCRIPTION="a library implementing an XSD schema based model for MVC generator."
 HOMEPAGE="http://www.beremiz.org/"
-EHG_REPO_URI_BASE="http://lolitech.fr/dev"
+EHG_REPO_URI_BASE="http://dev.automforge.net/"
 
 LICENSE="GPL-2"
 SLOT="0"

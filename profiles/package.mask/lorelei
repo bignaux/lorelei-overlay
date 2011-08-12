@@ -3,10 +3,10 @@
 # per QA team policy, all these need to be kept masked by default, if
 # available in the tree.
 
-app-text/docutils-hg
-dev-lang/matiec-hg
-dev-python/xmlclass-hg
-dev-util/beremiz-hg
-dev-util/plcopeneditor-hg
-sys-apps/canfestival-hg
-sys-apps/canfestival-objdictgen-hg
+app-text/docutils
+dev-lang/matiec
+dev-python/xmlclass
+dev-util/beremiz
+dev-util/plcopeneditor
+sys-apps/canfestival
+sys-apps/canfestival-objdictgen

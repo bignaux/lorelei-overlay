@@ -2,21 +2,25 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+# Ronan Bignaux
 
-inherit eutils mercurial toolchain-funcs
+EAPI="3"
 
-DESCRIPTION="a IEC 61131-3 compiler"
+inherit eutils mercurial
+
+DESCRIPTION="Open Source framework for automation"
 HOMEPAGE="http://www.beremiz.org/"
-EHG_REPO_URI_BASE="http://lolitech.fr/dev"
+EHG_REPO_URI_BASE="http://dev.automforge.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="doc"
 
-DEPENDS="sys-devel/bison
-	sys-devel/flex"
+RDEPEND="dev-python/wxpython"
+
+S="${WORKDIR}/docutils"
+DEST="/usr/share/docutils"
 
 src_unpack() {
 	if [ -n "$NOFETCH" ]; then
@@ -24,13 +28,12 @@ src_unpack() {
 		EHG_CLONE_CMD=/bin/true
 	fi
 
-	EHG_REPO_URI="${EHG_REPO_URI_BASE}/matiec"
+	EHG_REPO_URI="${EHG_REPO_URI_BASE}/docutils"
 	mercurial_src_unpack
 }
 
-S="${WORKDIR}/matiec"
-
 src_install() {
-	exeinto /usr/bin
-	doexe iec2c iec2iec || die "install failed"
+	dodir ${DEST}
+	insinto ${DEST}
+	doins -r *.py
 }

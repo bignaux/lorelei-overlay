@@ -10,7 +10,7 @@ inherit mercurial
 
 DESCRIPTION="ANSI-C platform independent CANOpen stack"
 HOMEPAGE="http://www.canfestival.org/"
-EHG_REPO_URI_BASE="http://lolitech.fr/dev"
+EHG_REPO_URI_BASE="http://dev.automforge.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
