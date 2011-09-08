@@ -2,11 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header:  $
 
+EAPI="3"
+PYTHON_MULTIPLE_ABIS="1"
+
 inherit distutils
 
 DESCRIPTION="A distant Gentoo synchronizer helper"
 HOMEPAGE="http://tuna.lyua.org/syndgen/"
-SRC_URI="http://tuna.lyua.org/downloads/${P}.tar.bz2"
+SRC_URI="mirror://sourceforge/syndgen/files/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
