@@ -4,11 +4,11 @@
 
 EAPI="4"
 
-inherit eutils mercurial
+inherit eutils
 
 DESCRIPTION="A flexible, IPv6 layer 3 VPN daemon"
 HOMEPAGE="http://www.vpzone.org/"
-EHG_REPO_URI="http://vpzone.hg.sourceforge.net/hgweb/vpzone/vpzone/"
+SRC_URI="http://downloads.sourceforge.net/project/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -22,7 +22,6 @@ DEPEND="dev-libs/libevent
 		net-misc/babeld
 		net-libs/gnutls"
 
-EHG_PROJECT="vpzone"
 
 CONFIG_CHECK="~TUN"
 ERROR_TUN="CONFIG_TUN:	needed for vpzone virtual network interfaces."
