@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit eutils
+inherit flag-o-matic eutils autotools
 
 DESCRIPTION="A flexible, IPv6 layer 3 VPN daemon"
 HOMEPAGE="http://www.vpzone.org/"
