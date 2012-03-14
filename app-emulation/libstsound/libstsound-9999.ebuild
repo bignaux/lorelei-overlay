@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit libtool eutils subversion 
+inherit libtool eutils subversion
 
 DESCRIPTION="emulating an AY-3-8912 chip"
 HOMEPAGE="http://code.google.com/p/cpcsdk/"
@@ -24,4 +24,3 @@ src_prepare(){
 src_install() {
 	emake DESTDIR="${D}" install || die "Make install failed"
 }
-

@@ -1,0 +1,11 @@
+--- src/core/dns.c.orig	2012-03-14 10:50:34.161210069 +0100
++++ src/core/dns.c	2012-03-14 10:50:46.800052059 +0100
+@@ -206,7 +206,7 @@
+ 		addr->sa_family = AF_INET;
+ 		break;
+ 	case AF_INET6:
+-		addr6 = &(((struct sockaddr_in6 *) &addr)->sin6_addr);
++		addr6 = &(((struct sockaddr_in6 *) addr)->sin6_addr);
+ 		memcpy(addr6, hostent[0].h_addr_list[0], sizeof(struct in6_addr));
+ 		addr->sa_family = AF_INET6;
+ 		break;

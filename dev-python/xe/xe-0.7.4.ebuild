@@ -14,6 +14,3 @@ SRC_URI="http://www.blarg.net/%7Esteveha/${P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-
-
-

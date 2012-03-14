@@ -21,7 +21,7 @@ RDEPEND="net-misc/rsync net-misc/openssh app-portage/gentoolkit"
 
 PYTHON_MODNAME="syndgen"
 
-src_install() 
+src_install()
 {
     cd ${S}
     distutils_src_install

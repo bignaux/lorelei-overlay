@@ -22,11 +22,12 @@ DEPEND="dev-libs/libevent
 		net-misc/babeld
 		net-libs/gnutls"
 
-
 CONFIG_CHECK="~TUN"
 ERROR_TUN="CONFIG_TUN:	needed for vpzone virtual network interfaces."
 
 src_prepare() {
+
+	epatch "${FILESDIR}/dns-overflow.patch"
 	./autogen.sh || die "autogen.sh failed"
 }
 
@@ -72,4 +73,3 @@ src_install() {
 	fperms 0750 /var/log/vpzone/
 	fowners root:vpzone /var/log/vpzone/
 }
-

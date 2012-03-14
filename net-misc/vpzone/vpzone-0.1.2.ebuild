@@ -60,4 +60,3 @@ src_install() {
 	fperms 0750 /var/log/vpzone/
 	fowners root:vpzone /var/log/vpzone/
 }
-

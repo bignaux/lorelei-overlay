@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit eutils subversion 
+inherit eutils subversion
 
 DESCRIPTION="manipulating dsk images and files inside"
 HOMEPAGE="http://code.google.com/p/cpcsdk/"
@@ -24,4 +24,3 @@ src_prepare(){
 src_install() {
 	emake DESTDIR="${D}" install || die "Make install failed"
 }
-

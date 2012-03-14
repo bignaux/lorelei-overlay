@@ -34,4 +34,3 @@ src_install(){
 	keepdir /var/run/babeld/
 	keepdir /var/log/babeld/
 }
-
