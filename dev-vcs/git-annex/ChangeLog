@@ -1,0 +1,21 @@
+# ChangeLog for dev-vcs/git-annex
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/dev-vcs/git-annex/ChangeLog,v 1.3 2012/02/09 05:48:59 robbat2 Exp $
+
+*git-annex-3.20111203-r1 (09 Feb 2012)
+
+  09 Feb 2012; Robin H. Johnson <robbat2@gentoo.org>
+  +git-annex-3.20111203-r1.ebuild:
+  Install some documentation to make this much more useful.
+
+  05 Dec 2011; Sergei Trofimovich <slyfox@gentoo.org>
+  git-annex-3.20111203.ebuild:
+  Raise minimal required dev-haskell/mtl version to make it compile.
+
+*git-annex-3.20111203 (04 Dec 2011)
+
+  04 Dec 2011; Sergei Trofimovich <slyfox@gentoo.org>
+  +git-annex-3.20111203.ebuild, +metadata.xml:
+  Initial version. manage files with git, without checking their contents into
+  git. (requested in bug #343563 by Christoph Junghans)
+
