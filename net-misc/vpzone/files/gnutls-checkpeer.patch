@@ -1,0 +1,108 @@
+diff --git a/src/plugins/AuthCiphers/gnutls/gnutls_cmd.c b/src/plugins/AuthCiphers/gnutls/gnutls_cmd.c
+index 670d911..d18e2ce 100644
+--- a/src/plugins/AuthCiphers/gnutls/gnutls_cmd.c
++++ b/src/plugins/AuthCiphers/gnutls/gnutls_cmd.c
+@@ -117,14 +117,19 @@ int dhfile_cmd(int argc, char **argv)
+ 
+ int crlfile_cmd(int argc, char **argv)
+ {
++	int ret = 0 ;
+ 	if (argc != 2)
+ 	{
+ 		log_msg(WARNING_LVL, "crlfile: needs one argument (and one only)\n");
+ 		return CMD_ERROR;
+ 	}
+ 
+-	if (gnutls_certificate_set_x509_crl_file(gnutls_cred, argv[1], GNUTLS_X509_FMT_PEM) < 0)
++	ret = gnutls_certificate_set_x509_crl_file(gnutls_cred, argv[1], GNUTLS_X509_FMT_PEM);
++	if (ret < 0)
++	{
++		log_msg(WARNING_LVL, "gnutls_certificate_set_x509_crl_file: %s", gnutls_strerror (ret));
+ 		return CMD_ERROR;
++	}
+ 
+ 	return CMD_SUCCESS;
+ }
+diff --git a/src/plugins/AuthCiphers/gnutls/gnutls_plugin.c b/src/plugins/AuthCiphers/gnutls/gnutls_plugin.c
+index 1e145fc..62a46d3 100644
+--- a/src/plugins/AuthCiphers/gnutls/gnutls_plugin.c
++++ b/src/plugins/AuthCiphers/gnutls/gnutls_plugin.c
+@@ -103,9 +103,10 @@ cipher_t *get_ciphers(void)
+ #endif
+ int gnutls_mnode_setup_server_cipher(mnode_t *mnode)
+ {
+-	int gnutls_ret;
++	int gnutls_ret = 0;
+ 	int retries = 0;
+ 	gnutls_session_t session;
++	unsigned int status = 0;
+ 
+ 	gnutls_init(&session, GNUTLS_SERVER);
+ 
+@@ -131,6 +132,29 @@ int gnutls_mnode_setup_server_cipher(mnode_t *mnode)
+ 		retries++;
+ 	}
+ 
++	gnutls_ret = gnutls_certificate_verify_peers2(session, &status);
++	if (gnutls_ret == 0) {
++
++		if (status & GNUTLS_CERT_INVALID) { 	// see https://www.gnu.org/software/gnutls/manual/gnutls.html#gnutls_005fcertificate_005fstatus_005ft
++
++			DEBUG_MSG("certificate is invalid: ");
++
++			if (status & GNUTLS_CERT_REVOKED)
++				DEBUG_MSG(" revoked\n");
++			if (status & GNUTLS_CERT_SIGNER_NOT_FOUND)
++				DEBUG_MSG(" signer not found\n");
++			if (status & GNUTLS_CERT_SIGNER_NOT_CA)
++				DEBUG_MSG(" signer not a CA\n");
++			if (status & GNUTLS_CERT_NOT_ACTIVATED)
++				DEBUG_MSG("not yet activated\n");
++			if (status & GNUTLS_CERT_EXPIRED)
++				DEBUG_MSG("expired\n");
++			return -1;
++		}
++	}
++	else log_msg(ERROR_LVL, "%s\n", gnutls_strerror(gnutls_ret));
++
++
+ 	if (vpz_mnode_cipher_extent_set(mnode, session) < 0)
+ 	{
+ 		gnutls_deinit(session);
+@@ -153,6 +177,7 @@ int gnutls_mnode_setup_client_cipher(mnode_t *mnode)
+ 	int gnutls_ret;
+ 	int retries = 0;
+ 	gnutls_session_t session;
++	unsigned int status = 0;
+ 
+ 	gnutls_init(&session, GNUTLS_CLIENT);
+ 
+@@ -177,6 +202,28 @@ int gnutls_mnode_setup_client_cipher(mnode_t *mnode)
+ 		retries++;
+ 	}
+ 
++	gnutls_ret = gnutls_certificate_verify_peers2(session, &status);
++	if (gnutls_ret == 0) {
++
++		if (status & GNUTLS_CERT_INVALID) { 	// see https://www.gnu.org/software/gnutls/manual/gnutls.html#gnutls_005fcertificate_005fstatus_005ft
++
++			DEBUG_MSG("certificate is invalid: ");
++
++			if (status & GNUTLS_CERT_REVOKED)
++				DEBUG_MSG(" revoked\n");
++			if (status & GNUTLS_CERT_SIGNER_NOT_FOUND)
++				DEBUG_MSG(" signer not found\n");
++			if (status & GNUTLS_CERT_SIGNER_NOT_CA)
++				DEBUG_MSG(" signer not a CA\n");
++			if (status & GNUTLS_CERT_NOT_ACTIVATED)
++				DEBUG_MSG("not yet activated\n");
++			if (status & GNUTLS_CERT_EXPIRED)
++				DEBUG_MSG("expired\n");
++			return -1;
++		}
++	}
++	else log_msg(ERROR_LVL, "%s\n", gnutls_strerror(gnutls_ret));
++
+ 	DEBUG_MSG("GNUTLS: mnode client session set up\n");
+ 
+ 	if (vpz_mnode_cipher_extent_set(mnode, session) < 0)
