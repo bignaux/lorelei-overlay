@@ -28,6 +28,7 @@ ERROR_TUN="CONFIG_TUN:	needed for vpzone virtual network interfaces."
 src_prepare() {
 
 	epatch "${FILESDIR}/dns-overflow.patch"
+	epatch "${FILESDIR}/gnutls-checkpeer.patch"
 	./autogen.sh || die "autogen.sh failed"
 }
 
