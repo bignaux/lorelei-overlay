@@ -6,7 +6,7 @@
 
 EAPI="2"
 
-inherit mercurial
+inherit mercurial autotools
 
 DESCRIPTION="ANSI-C platform independent CANOpen stack"
 HOMEPAGE="http://www.canfestival.org/"
@@ -21,24 +21,36 @@ DEPENDS="dev-python/gnosis-utils
 	dev-python/wxpython"
 
 src_unpack() {
+	S="${WORKDIR}"
 	if [ -n "$NOFETCH" ]; then
 		EHG_PULL_CMD=/bin/true
 		EHG_CLONE_CMD=/bin/true
 	fi
 
-	EHG_REPO_URI="${EHG_REPO_URI_BASE}/CanFestival-3/objdictgen"
+	EHG_REPO_URI="${EHG_REPO_URI_BASE}/CanFestival-3"
 	mercurial_src_unpack
 }
 
 DEST="/usr/share/objdictgen"
-S="${WORKDIR}/objdictgen/objdictgen"
+S="${WORKDIR}/objdictgen"
 
 src_prepare(){
-	rm Gnosis_Utils-current.tar.gz
-	rm -fr gnosis
-	rm Makefile*
+	cd "${WORKDIR}"
+	rm objdictgen/Gnosis_Utils-current.tar.gz
+	rm -fr objdictgen/gnosis
+	# rm Makefile*
+	eautomake
+
+}
+src_configure(){
+	cd "${WORKDIR}/objdictgen"
+	econf
 }
 
+src_compile(){
+	cd "${WORKDIR}/objdictgen"
+	emake
+}
 src_install() {
 	dodir ${DEST}
 	insinto ${DEST}
