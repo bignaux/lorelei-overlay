@@ -15,7 +15,8 @@ EHG_REPO_URI_BASE="http://dev.automforge.net/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="+socket +wxwidgets"
+DEPEND="wxwidgets? ( dev-python/wxpython )"
 
 src_unpack() {
 	if [ -n "$NOFETCH" ]; then
@@ -28,14 +29,23 @@ src_unpack() {
 }
 
 S="${WORKDIR}/CanFestival-3"
+
 src_prepare(){
 	sed -i '/ldconfig/d' Makefile.in
-	sed -i '/objdictgen/d' Makefile.in
 }
 
 src_configure(){
 	# it's a custom configure , dont works with econf
-	sh configure --prefix="${D}/usr/"
+	local confcmd="./configure
+		--cc=${CBUILD}-gcc
+		--cxx=${CBUILD}-g++
+		--prefix='${D}/usr/'
+		$(use socket && echo '--can=socket')
+		$(use socket || echo '--can=virtual_kernel')
+		$(use wxwidgets && echo '--wx=1')
+		$(use wxwidgets || echo '--wx=0')"
+	echo ${confcmd}
+	${confcmd} || die "configure failed"
 }
 
 src_install() {
