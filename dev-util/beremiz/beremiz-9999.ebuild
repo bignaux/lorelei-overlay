@@ -27,11 +27,8 @@ RDEPEND="dev-python/gnosis-utils
 		dev-python/simplejson
 		dev-util/wxglade
 		dev-python/pyro:3
-		sys-apps/canfestival
-		dev-lang/matiec
-		dev-python/xmlclass
-		dev-util/plcopeneditor
-		app-text/docutils"
+		sys-apps/canfestival"
+		#dev-lang/matiec
 
 S="${WORKDIR}/beremiz"
 DEST="/usr/share/beremiz"

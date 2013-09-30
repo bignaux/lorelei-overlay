@@ -3,9 +3,7 @@
 # per QA team policy, all these need to be kept masked by default, if
 # available in the tree.
 
-app-text/docutils
 dev-lang/matiec
-dev-python/xmlclass
 dev-util/beremiz
 dev-util/plcopeneditor
 sys-apps/canfestival

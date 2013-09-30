@@ -15,7 +15,7 @@ EHG_REPO_URI_BASE="http://dev.automforge.net/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+socket +wxwidgets"
+IUSE="+socket +wxwidgets +examples"
 DEPEND="wxwidgets? ( dev-python/wxpython )"
 
 src_unpack() {
@@ -41,6 +41,7 @@ src_configure(){
 		--cxx=${CBUILD}-g++
 		--prefix='${D}/usr/'
 		$(use socket && echo '--can=socket')
+		$(use examples && echo '--can=socket')
 		$(use socket || echo '--can=virtual_kernel')
 		$(use wxwidgets && echo '--wx=1')
 		$(use wxwidgets || echo '--wx=0')"

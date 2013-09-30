@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-inherit eutils mercurial toolchain-funcs
+inherit eutils autotools mercurial
 
 DESCRIPTION="a IEC 61131-3 compiler"
 HOMEPAGE="http://www.beremiz.org/"
@@ -26,9 +26,14 @@ src_unpack() {
 
 	EHG_REPO_URI="${EHG_REPO_URI_BASE}/matiec"
 	mercurial_src_unpack
-}
 
-S="${WORKDIR}/matiec"
+    cd "${S}"
+
+    # Remove problematic LDFLAGS declaration
+    # find -iname Makefile.am -exec sed -i -e '/^LDFLAGS/d' {} \;
+    
+    eautoreconf
+}
 
 src_install() {
 	exeinto /usr/bin
