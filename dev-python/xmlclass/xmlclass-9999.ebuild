@@ -3,6 +3,7 @@
 # $Header: $
 
 EAPI="3"
+RESTRICT_PYTHON_ABIS="3.*"
 
 inherit eutils mercurial distutils
 MY_P="xmlclass"
@@ -16,9 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
-DEPEND="${RDEPEND}
-	dev-python/setuptools"
-RESTRICT_PYTHON_ABIS="3.*"
+DEPEND="dev-python/setuptools"
+RDEPEND=""
 
 PYTHON_MODNAME="${MY_P/-/_}"
 S="${WORKDIR}/${MY_P}"

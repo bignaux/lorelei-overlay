@@ -5,7 +5,7 @@
 WANT_AUTOCONF="latest"
 WANT_AUTOMAKE="latest"
 
-inherit eutils autotools
+inherit eutils 
 
 DESCRIPTION="Serial To Network Proxy"
 SRC_URI="http://lpccomp.bc.ca/remserial/${P}.tar.gz"

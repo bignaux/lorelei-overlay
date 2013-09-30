@@ -6,7 +6,7 @@ DESCRIPTION="A-Bus is a simple inter-process communication (IPC) system for embe
 HOMEPAGE="http://code.google.com/p/abus/"
 SRC_URI="http://abus.googlecode.com/files/${P}.tar.gz"
 
-LICENSE="LGPL"
+LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="fcgi"
