@@ -4,7 +4,7 @@
 
 # Todo : check dependancies , add use : doc examples and custom conf for drivers
 
-EAPI="3"
+EAPI=4
 
 inherit mercurial
 
@@ -17,6 +17,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+socket +wxwidgets +examples"
 DEPEND="wxwidgets? ( dev-python/wxpython )"
+RDEPEND=""
 
 src_unpack() {
 	if [ -n "$NOFETCH" ]; then

@@ -2,10 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-# TODO : find a trick for docutils ( this lib should be renamed to avoid name conflict )
 # * don't rely on canfestival ( USE )
 
-EAPI="2"
+EAPI=5
 
 inherit eutils mercurial
 
@@ -15,21 +14,21 @@ EHG_REPO_URI_BASE="http://dev.automforge.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="doc"
 
 #dev-python/ctypes
 RDEPEND="dev-python/gnosis-utils
 		dev-python/wxpython
+		dev-python/twisted-core
 		dev-python/numpy
-		dev-python/twisted
 		dev-python/nevow
 		dev-python/simplejson
 		dev-util/wxglade
 		dev-python/pyro:3
 		sys-apps/canfestival"
 		#dev-lang/matiec
-
+		#dev-python/twisted find right dependancies
 S="${WORKDIR}/beremiz"
 DEST="/usr/share/beremiz"
 

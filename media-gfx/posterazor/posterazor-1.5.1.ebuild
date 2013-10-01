@@ -4,7 +4,7 @@
 
 inherit eutils
 
-DESCRIPTION="The PosteRazor cuts a raster image into pieces which can afterwards
+DESCRIPTION="cuts a raster image into pieces which can afterwards
 be printed out and assembled to a poster."
 HOMEPAGE="http://posterazor.sourceforge.net/"
 SRC_URI="http://downloads.sourceforge.net/project/posterazor/Source%20Releases/${PV}/PosteRazor-${PV}-Source.zip"

@@ -2,10 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header:  $
 
-EAPI="3"
+EAPI=5
 PYTHON_MULTIPLE_ABIS="1"
+PYTHON_COMPAT=( python{2_7,3_2} )
 
-inherit distutils
+inherit distutils-r1
 
 DESCRIPTION="A distant Gentoo synchronizer helper"
 HOMEPAGE="http://tuna.lyua.org/syndgen/"
@@ -24,7 +25,6 @@ PYTHON_MODNAME="syndgen"
 src_install()
 {
     cd ${S}
-    distutils_src_install
-
+    distutils-r1_src_install
     doman doc/syndgen.1
 }

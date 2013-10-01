@@ -2,9 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI=4
+PYTHON_COMPAT=( python2_7 )
 
-inherit eutils distutils
+inherit distutils-r1
 
 DESCRIPTION="Utility to show live keyboard and mouse status for teaching and screencasts."
 HOMEPAGE="http://code.google.com/p/key-mon/"
@@ -16,8 +17,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND=""
-DEPEND="dev-python/setuptools
-	dev-python/pygtk
+DEPEND="dev-python/pygtk
 	dev-python/dbus-python
 	dev-python/python-xlib
 	x11-proto/recordproto

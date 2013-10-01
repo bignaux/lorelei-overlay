@@ -3,10 +3,9 @@
 # $Header: $
 
 EAPI=4
-PYTHON_DEPEND="*"
-SUPPORT_PYTHON_ABIS="1"
+PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python distutils
+inherit distutils-r1
 
 DESCRIPTION="Python implementation of the Sane API (using ctypes) and abstration layer."
 HOMEPAGE="https://github.com/jflesch/pyinsane"
