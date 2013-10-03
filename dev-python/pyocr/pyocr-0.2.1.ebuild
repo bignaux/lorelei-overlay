@@ -12,7 +12,10 @@ HOMEPAGE="https://github.com/jflesch/pyocr"
 SRC_URI="https://github.com/jflesch/pyocr/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-3"
+IUSE="cuneiform tesseract"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RDEPENDS=""
+RDEPENDS="cuneiform? ( app-text/cuneiform )
+    tesseract?  (app-text/tesseract)
+    dev-python/pillow"
