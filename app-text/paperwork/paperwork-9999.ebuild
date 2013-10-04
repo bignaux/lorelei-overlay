@@ -23,7 +23,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-vcs/git"
+DEPEND=""
 
 RDEPEND="dev-python/wxpython
 	dev-python/pygobject
@@ -38,8 +38,4 @@ RDEPEND="dev-python/wxpython
 	dev-python/pillow
 	dev-python/pyinsane
 	dev-python/pyocr
-	media-gfx/sane-backends
-	media-gfx/sane-frontends
-	media-gfx/xsane
-	app-text/tesseract
 	x11-libs/gtk+"
