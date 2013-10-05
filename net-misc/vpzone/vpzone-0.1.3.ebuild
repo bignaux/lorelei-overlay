@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI=5
 
 inherit flag-o-matic eutils
 
@@ -17,6 +17,7 @@ IUSE="debug"
 
 IUSE=""
 
+RDEPEND=""
 DEPEND="dev-libs/libevent
 		>=net-dns/c-ares-1.4
 		net-misc/babeld
