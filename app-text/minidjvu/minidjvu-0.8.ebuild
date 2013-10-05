@@ -17,12 +17,15 @@ RDEPEND=""
 DEPEND="media-libs/tiff"
 
 src_install() {
-    exeinto /usr/sbin
+    exeinto /usr/bin
     doexe ./bin/.libs/${PN} || die "install failed"
     
-    insinto /usr/lib
-    dolib ./bin/.libs/libminidjvu.so
-    
+    insinto /usr/$(get_libdir)
+    dolib.so ./bin/.libs/*.so*
+
+    # links for backwards compatibility
+    dosym libminidjvu.so /usr/$(get_libdir)/libminidjvu.so.0
+
     dodoc README || die "dodoc failed"
     doman doc/${PN}.1 || die "doman failed"
 }
