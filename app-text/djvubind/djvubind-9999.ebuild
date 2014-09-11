@@ -3,16 +3,24 @@
 # $Header: $
 
 EAPI=5
-PYTHON_COMPAT=( python3_2 )
-inherit distutils-r1 mercurial
+PYTHON_COMPAT=( python3_{2,3,4} )
+
+EGIT_REPO_URI="git://github.com/strider1551/${PN}.git
+	http://github.com/strider1551/${PN}/"
+	
+inherit distutils-r1 git-2
 
 DESCRIPTION="Create highly compressed djvu files with positional ocr, metadata, and bookmarks."
-HOMEPAGE="https://code.google.com/p/djvubind/"
-EHG_REPO_URI="https://code.google.com/p/djvubind/"
+HOMEPAGE="https://github.com/strider1551/djvubind"
+IUSE="tesseract minidjvu cuneiform"
 
 LICENSE="GPL-3"
+
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
-RDEPEND="app-text/minidjvu"
+RDEPEND="media-gfx/imagemagick
+		dev-python/python-djvulibre
+		tesseract? ( app-text/tesseract )
+		minidjvu?  ( app-text/minidjvu )
+		cuneiform? ( app-text/cuneiform )"
