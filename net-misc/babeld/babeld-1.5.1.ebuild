@@ -6,8 +6,8 @@ EAPI="5"
 
 inherit eutils
 
-DESCRIPTION="the Ad-Hoc Configuration Protocol"
-HOMEPAGE="http://www.pps.jussieu.fr/~jch/software/ahcp/"
+DESCRIPTION="a loop-free distance-vector routing protocol"
+HOMEPAGE="http://www.pps.jussieu.fr/~jch/software/babel/"
 SRC_URI="http://www.pps.jussieu.fr/~jch/software/files/${P}.tar.gz"
 
 LICENSE="MIT"
@@ -20,8 +20,17 @@ src_compile() {
 }
 
 src_install(){
-	emake install.minimal PREFIX=/usr "TARGET=${D}" || die "install failed"
+	exeinto /usr/sbin
+	doexe babeld || die "install failed"
 	dodoc CHANGES README || die "dodoc failed"
 	mv ${PN}.man ${PN}.8
 	doman ${PN}.8 || die "doman failed"
+
+	# Empty dir
+	dodir /etc/babeld
+	keepdir /etc/babeld
+	insinto /etc/babeld ; doins "${FILESDIR}/${PN}.conf"
+
+	keepdir /var/run/babeld/
+	keepdir /var/log/babeld/
 }

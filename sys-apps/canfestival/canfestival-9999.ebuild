@@ -4,7 +4,7 @@
 
 # Todo : check dependancies , add use : doc examples and custom conf for drivers
 
-EAPI=4
+EAPI=5
 
 inherit mercurial
 

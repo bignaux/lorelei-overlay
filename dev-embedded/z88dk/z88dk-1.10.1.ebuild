@@ -4,7 +4,7 @@
 
 # could be improve adding test and doc flags ...
 
-EAPI=4
+EAPI=5
 
 DESCRIPTION="z88dk - z80 Development Kit ."
 HOMEPAGE="http://www.z88dk.org/forum/index.php"
