@@ -8,3 +8,4 @@ dev-util/beremiz
 dev-util/plcopeneditor
 sys-apps/canfestival
 sys-apps/canfestival-objdictgen
+dev-util/modelio
