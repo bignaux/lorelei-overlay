@@ -32,6 +32,6 @@ src_install() {
 	exeinto /usr/bin
 	doexe ${WORKDIR}/cmst-opensource-src-${PV}/apps/cmstapp/cmst || die "doexe failed"
 	doman ${S}/misc/manpage/${PN}.1
-	doicon ${S}/images/application/cmst.png
-	domenu ${S}/icons/${PN}.desktop
+	newicon -s 24 ${S}/images/application/variations/cmst_button01.png cmst.png 
+	domenu ${S}/misc/desktop/${PN}.desktop
 }
