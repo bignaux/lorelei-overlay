@@ -9,3 +9,4 @@ dev-util/plcopeneditor
 sys-apps/canfestival
 sys-apps/canfestival-objdictgen
 dev-util/modelio
+net-p2p/cpp-ethereum
