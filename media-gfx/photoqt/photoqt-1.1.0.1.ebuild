@@ -15,6 +15,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE="graphicsmagick exiv2"
 
 DEPEND="dev-qt/qtmultimedia:5
+		dev-qt/qtimageformats:5
 		dev-qt/qtgui:5
 		dev-qt/qtnetwork:5
 		exiv2? ( media-gfx/exiv2 )
