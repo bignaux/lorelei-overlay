@@ -18,7 +18,7 @@ DEPEND="dev-qt/qtmultimedia:5
 		dev-qt/qtimageformats:5
 		dev-qt/qtgui:5
 		dev-qt/qtnetwork:5
-		exiv2? ( media-gfx/exiv2 )
+		exiv2? ( media-gfx/exiv2:= )
 		graphicsmagick? ( media-gfx/graphicsmagick )"
 RDEPEND="${DEPEND}"
 

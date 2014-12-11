@@ -17,7 +17,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE="GPL-1"
+LICENSE="GPL-3"
 SLOT="0"
 IUSE="tiff svg"
 
@@ -26,7 +26,7 @@ RDEPEND="dev-qt/qtwidgets:5
 	dev-qt/qtcore:5
 	tiff? ( dev-qt/qtimageformats:5 )
 	svg? ( dev-qt/qtsvg:5 )
-	media-gfx/exiv2"
+	media-gfx/exiv2:="
 DEPEND="${RDEPEND}"
 
 src_configure() {
