@@ -7,7 +7,7 @@ EAPI=5
 inherit qmake-utils
 
 DESCRIPTION="Image Viewer and Organizer"
-HOMEPAGE="https://gitorious.org/phototonic"
+HOMEPAGE="https://oferkv.github.io/phototonic/"
 if [[ ${PV} = *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="git://gitorious.org/phototonic/phototonic.git"
