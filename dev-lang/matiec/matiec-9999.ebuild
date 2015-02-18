@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="3"
+EAPI="5"
 
 inherit eutils autotools mercurial
 
@@ -37,5 +37,8 @@ src_unpack() {
 
 src_install() {
 	exeinto /usr/bin
-	doexe iec2c iec2iec || die "install failed"
+	doexe iec2c iec2iec || die "Install failed"
+
+	dodir /usr/share/${PN}
+	cp -a "${S}"/lib/ "${D}/usr/share/${PN}" || die "Install failed!"
 }
