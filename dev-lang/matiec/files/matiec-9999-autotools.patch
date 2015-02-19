@@ -1,0 +1,73 @@
+diff -r 8bfcc8e62bd6 Makefile.am
+--- a/Makefile.am	Sat Dec 06 19:14:23 2014 +0000
++++ b/Makefile.am	Thu Feb 19 02:26:38 2015 +0100
+@@ -1,4 +1,3 @@
+-include common.mk
+ 
+ bin_PROGRAMS = iec2c iec2iec
+ 
+@@ -7,7 +6,7 @@
+ ACLOCAL_AMFLAGS=-I config
+ 
+ HGVERSION= $(shell hg -R $(top_srcdir) parents --template '{node|short}' 2> /dev/null || grep node $(top_srcdir)/.hg_archival.txt 2> /dev/null || true )
+-AM_CXXFLAGS += -DHGVERSION="\"${HGVERSION}\""
++AM_CXXFLAGS = -DHGVERSION="\"${HGVERSION}\""
+ 
+ iec2c_LDADD = stage1_2/libstage1_2.a \
+ 	stage3/libstage3.a \
+diff -r 8bfcc8e62bd6 absyntax/Makefile.am
+--- a/absyntax/Makefile.am	Sat Dec 06 19:14:23 2014 +0000
++++ b/absyntax/Makefile.am	Thu Feb 19 02:26:38 2015 +0100
+@@ -1,4 +1,3 @@
+-include ../common.mk
+ 
+ lib_LIBRARIES = libabsyntax.a
+ 
+diff -r 8bfcc8e62bd6 absyntax_utils/Makefile.am
+--- a/absyntax_utils/Makefile.am	Sat Dec 06 19:14:23 2014 +0000
++++ b/absyntax_utils/Makefile.am	Thu Feb 19 02:26:38 2015 +0100
+@@ -1,4 +1,3 @@
+-include ../common.mk
+ 
+ lib_LIBRARIES = libabsyntax_utils.a
+ 
+diff -r 8bfcc8e62bd6 stage1_2/Makefile.am
+--- a/stage1_2/Makefile.am	Sat Dec 06 19:14:23 2014 +0000
++++ b/stage1_2/Makefile.am	Thu Feb 19 02:26:38 2015 +0100
+@@ -1,4 +1,3 @@
+-include ../common.mk
+ 
+ AM_YFLAGS = -d
+ AM_LFLAGS = -o$(LEX_OUTPUT_ROOT).c
+diff -r 8bfcc8e62bd6 stage3/Makefile.am
+--- a/stage3/Makefile.am	Sat Dec 06 19:14:23 2014 +0000
++++ b/stage3/Makefile.am	Thu Feb 19 02:26:38 2015 +0100
+@@ -1,4 +1,3 @@
+-include ../common.mk
+ 
+ lib_LIBRARIES = libstage3.a
+ 
+diff -r 8bfcc8e62bd6 stage4/Makefile.am
+--- a/stage4/Makefile.am	Sat Dec 06 19:14:23 2014 +0000
++++ b/stage4/Makefile.am	Thu Feb 19 02:26:38 2015 +0100
+@@ -1,4 +1,3 @@
+-include ../common.mk
+ 
+ SUBDIRS = generate_c generate_iec
+ 
+diff -r 8bfcc8e62bd6 stage4/generate_c/Makefile.am
+--- a/stage4/generate_c/Makefile.am	Sat Dec 06 19:14:23 2014 +0000
++++ b/stage4/generate_c/Makefile.am	Thu Feb 19 02:26:38 2015 +0100
+@@ -1,4 +1,3 @@
+-include ../../common.mk
+ 
+ lib_LIBRARIES = libstage4_c.a
+ 
+diff -r 8bfcc8e62bd6 stage4/generate_iec/Makefile.am
+--- a/stage4/generate_iec/Makefile.am	Sat Dec 06 19:14:23 2014 +0000
++++ b/stage4/generate_iec/Makefile.am	Thu Feb 19 02:26:38 2015 +0100
+@@ -1,4 +1,3 @@
+-include ../../common.mk
+ 
+ lib_LIBRARIES = libstage4_iec.a
+ 

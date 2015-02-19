@@ -4,34 +4,32 @@
 
 EAPI="5"
 
-inherit eutils autotools mercurial
+inherit eutils autotools
 
 DESCRIPTION="a IEC 61131-3 compiler"
 HOMEPAGE="http://www.beremiz.org/"
-EHG_REPO_URI_BASE="http://dev.automforge.net/"
-
-LICENSE="GPL-2"
+LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+
+if [[ ${PV} == "9999" ]] ; then
+	inherit mercurial
+	EHG_REPO_URI_BASE="http://dev.automforge.net/"
+	EHG_REPO_URI="${EHG_REPO_URI_BASE}/${PN}"
+	KEYWORDS="~amd64 ~x86"
+else
+	inherit vcs-snapshot
+	SRC_URI="
+	   http://dev.automforge.net/${PN}/archive/tip.tar.bz2 -> ${P}.tar.bz2"
+fi
+
 IUSE=""
 
 DEPENDS="sys-devel/bison
 	sys-devel/flex"
 
-src_unpack() {
-	if [ -n "$NOFETCH" ]; then
-		EHG_PULL_CMD=/bin/true
-		EHG_CLONE_CMD=/bin/true
-	fi
-
-	EHG_REPO_URI="${EHG_REPO_URI_BASE}/matiec"
-	mercurial_src_unpack
-
-    cd "${S}"
-
-    # Remove problematic LDFLAGS declaration
-    # find -iname Makefile.am -exec sed -i -e '/^LDFLAGS/d' {} \;
-    
+src_prepare() {
+    epatch "${FILESDIR}/${P}-autotools.patch"
+    epatch "${FILESDIR}/${P}-libdir.patch"
     eautoreconf
 }
 

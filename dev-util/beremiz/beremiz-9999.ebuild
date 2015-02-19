@@ -10,7 +10,17 @@ inherit eutils mercurial
 
 DESCRIPTION="Open Source framework for automation"
 HOMEPAGE="http://www.beremiz.org/"
-EHG_REPO_URI_BASE="http://dev.automforge.net/"
+
+if [[ ${PV} == "9999" ]] ; then
+	inherit mercurial
+	EHG_REPO_URI_BASE="http://dev.automforge.net/"
+	EHG_REPO_URI="${EHG_REPO_URI_BASE}/${PN}"
+	KEYWORDS="~amd64 ~x86"
+else
+	inherit vcs-snapshot
+	SRC_URI="
+	   http://dev.automforge.net/${PN}/archive/tip.tar.bz2 -> ${P}.tar.bz2"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -29,29 +39,20 @@ RDEPEND="dev-python/gnosis-utils
 		sys-apps/canfestival"
 		#dev-lang/matiec
 		#dev-python/twisted find right dependancies
-S="${WORKDIR}/beremiz"
-DEST="/usr/share/beremiz"
-
-src_unpack() {
-	if [ -n "$NOFETCH" ]; then
-		EHG_PULL_CMD=/bin/true
-		EHG_CLONE_CMD=/bin/true
-	fi
-
-	EHG_REPO_URI="${EHG_REPO_URI_BASE}/beremiz"
-	mercurial_src_unpack
-}
+#S="${WORKDIR}/beremiz"
 
 src_install() {
-	dodir ${DEST}
-	insinto ${DEST}
+	dodir /usr/share/${PN}
+	doins -r * "${D}/usr/share/${PN}" || die "Install failed!"
+	
+	insinto ${D}
 	doins -r *
 
 	insinto /usr/share/applications
 	doins "${S}"/debian/{beremiz{_doc,_svgui,_wxglade},beremiz}.desktop
 
-	fperms 755 ${DEST}/Beremiz.py
-	dosym ${DEST}/Beremiz.py /usr/bin/beremiz
+	fperms 755 ${D}/Beremiz.py
+	dosym ${D}/Beremiz.py /usr/bin/beremiz
 
 	if use doc; then
 		dohtml -r doc/*
