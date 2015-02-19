@@ -1,0 +1,15 @@
+diff -r 4c130dba8366 Beremiz.py
+--- a/Beremiz.py	Mon Mar 17 16:16:06 2014 +0100
++++ b/Beremiz.py	Thu Feb 19 15:01:21 2015 +0100
+@@ -25,7 +25,10 @@
+ 
+ updateinfo_url = None
+ 
+-import os, sys, getopt, wx
++import os, sys, getopt
++import wxversion
++wxversion.select('2.8')
++import wx
+ import __builtin__
+ from wx.lib.agw.advancedsplash import AdvancedSplash
+ import tempfile

@@ -7,14 +7,13 @@ EAPI="5"
 inherit eutils autotools
 
 DESCRIPTION="a IEC 61131-3 compiler"
-HOMEPAGE="http://www.beremiz.org/"
+HOMEPAGE="https://bitbucket.org/mjsousa/matiec"
 LICENSE="GPL-3"
 SLOT="0"
 
 if [[ ${PV} == "9999" ]] ; then
 	inherit mercurial
-	EHG_REPO_URI_BASE="http://dev.automforge.net/"
-	EHG_REPO_URI="${EHG_REPO_URI_BASE}/${PN}"
+	EHG_REPO_URI="https://bitbucket.org/mjsousa/matiec"
 	KEYWORDS="~amd64 ~x86"
 else
 	inherit vcs-snapshot

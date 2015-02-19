@@ -2,11 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-# * don't rely on canfestival ( USE )
-
 EAPI=5
+PYTHON_COMPAT=( python2_7 )
 
-inherit eutils mercurial
+inherit eutils
 
 DESCRIPTION="Open Source framework for automation"
 HOMEPAGE="http://www.beremiz.org/"
@@ -25,34 +24,33 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="doc"
+IUSE="canfestival doc"
 
-#dev-python/ctypes
 RDEPEND="dev-python/gnosis-utils
-		dev-python/wxpython
+		dev-python/wxpython:2.8
 		dev-python/twisted-core
 		dev-python/numpy
 		dev-python/nevow
 		dev-python/simplejson
 		dev-util/wxglade
 		dev-python/pyro:3
-		sys-apps/canfestival"
-		#dev-lang/matiec
+		canfestival? ( sys-apps/canfestival )
+		dev-lang/matiec"
 		#dev-python/twisted find right dependancies
-#S="${WORKDIR}/beremiz"
+
+src_prepare() {
+    epatch "${FILESDIR}/beremiz-fix-wxversion.patch"
+}
 
 src_install() {
-	dodir /usr/share/${PN}
-	doins -r * "${D}/usr/share/${PN}" || die "Install failed!"
+	insinto /usr/share/${PN}
+	doins -r * || die "Install failed!"
 	
-	insinto ${D}
-	doins -r *
+    #insinto /usr/share/applications
+	#doins debian/{beremiz{_doc,_svgui,_wxglade},beremiz}.desktop
 
-	insinto /usr/share/applications
-	doins "${S}"/debian/{beremiz{_doc,_svgui,_wxglade},beremiz}.desktop
-
-	fperms 755 ${D}/Beremiz.py
-	dosym ${D}/Beremiz.py /usr/bin/beremiz
+	fperms 755 /usr/share/"${PN}"/Beremiz.py
+	dosym /usr/share/"${PN}"/Beremiz.py /usr/bin/beremiz
 
 	if use doc; then
 		dohtml -r doc/*
