@@ -24,19 +24,18 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="canfestival doc"
+IUSE="canfestival doc twisted"
 
-RDEPEND="dev-python/gnosis-utils
-		dev-python/wxpython:2.8
-		dev-python/twisted-core
+RDEPEND="dev-python/wxpython:2.8
 		dev-python/numpy
 		dev-python/nevow
 		dev-python/simplejson
 		dev-util/wxglade
 		dev-python/pyro:3
-		canfestival? ( sys-apps/canfestival )
-		dev-lang/matiec"
-		#dev-python/twisted find right dependancies
+		dev-lang/matiec
+		canfestival? ( sys-apps/canfestival \
+		               dev-python/gnosis-utils )
+		twisted? ( dev-python/twisted-core )"
 
 src_prepare() {
     epatch "${FILESDIR}/beremiz-fix-wxversion.patch"
@@ -49,8 +48,12 @@ src_install() {
     #insinto /usr/share/applications
 	#doins debian/{beremiz{_doc,_svgui,_wxglade},beremiz}.desktop
 
-	fperms 755 /usr/share/"${PN}"/Beremiz.py
+	fperms 0755 /usr/share/"${PN}"/Beremiz.py
 	dosym /usr/share/"${PN}"/Beremiz.py /usr/bin/beremiz
+	
+	# Install icon and desktop file
+	newicon "images/brz.png" "${PN}.png"
+    make_desktop_entry /usr/bin/beremiz "Beremiz" "${PN}" "Development"
 
 	if use doc; then
 		dohtml -r doc/*
