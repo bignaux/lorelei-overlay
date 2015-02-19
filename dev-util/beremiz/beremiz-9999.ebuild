@@ -24,18 +24,20 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="canfestival doc twisted"
+IUSE="canfestival doc +twisted"
 
-RDEPEND="dev-python/wxpython:2.8
-		dev-python/numpy
-		dev-python/nevow
-		dev-python/simplejson
-		dev-util/wxglade
-		dev-python/pyro:3
-		dev-lang/matiec
+RDEPEND="
 		canfestival? ( dev-libs/canfestival \
 		               dev-python/gnosis-utils )
-		twisted? ( dev-python/twisted-core )"
+		twisted? ( dev-python/twisted-core \
+		           dev-python/autobahn  )
+		dev-lang/matiec
+        dev-python/wxpython:2.8
+		dev-python/nevow
+        dev-python/numpy
+    	dev-python/pyro:3
+		dev-python/simplejson
+		dev-util/wxglade"
 
 src_prepare() {
     epatch "${FILESDIR}/beremiz-fix-wxversion.patch"
