@@ -2,34 +2,35 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-# Todo : check dependancies , add use : doc examples and custom conf for drivers
-
 EAPI=5
 
-inherit mercurial
+inherit toolchain-funcs
 
 DESCRIPTION="ANSI-C platform independent CANOpen stack"
 HOMEPAGE="http://www.canfestival.org/"
-EHG_REPO_URI_BASE="http://dev.automforge.net/"
+EHG_REPO_URI_BASE="http://dev.automforge.net"
+MY_PN="CanFestival-3"
+S="${WORKDIR}/${MY_PN}"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+socket +wxwidgets +examples"
-DEPEND="wxwidgets? ( dev-python/wxpython )"
-RDEPEND=""
+IUSE="examples objdictgen socket wxwidgets"
 
-src_unpack() {
-	if [ -n "$NOFETCH" ]; then
-		EHG_PULL_CMD=/bin/true
-		EHG_CLONE_CMD=/bin/true
-	fi
+RDEPEND="objdictgen? ( dev-python/gnosis-utils )"
+DEPEND="${RDEPEND}
+        wxwidgets? ( dev-python/wxpython:2.8 )"
 
-	EHG_REPO_URI="${EHG_REPO_URI_BASE}/CanFestival-3"
-	mercurial_src_unpack
-}
-
-S="${WORKDIR}/CanFestival-3"
+if [[ ${PV} == "9999" ]] ; then
+	inherit mercurial
+	EHG_REPO_URI_BASE="http://dev.automforge.net/"
+	EHG_REPO_URI="${EHG_REPO_URI_BASE}/${MY_PN}"
+	KEYWORDS="~amd64 ~x86"
+else
+	inherit vcs-snapshot
+	SRC_URI="
+	   http://dev.automforge.net/${PN}/archive/tip.tar.bz2 -> ${P}.tar.bz2"
+fi
 
 src_prepare(){
 	sed -i '/ldconfig/d' Makefile.in
@@ -48,7 +49,16 @@ src_configure(){
 		$(use wxwidgets || echo '--wx=0')"
 	echo ${confcmd}
 	${confcmd} || die "configure failed"
+	
+    #remove bundled dev-python/gnosis-utils
+	#emake -f objdictgen/Makefile mrproper
 }
+
+#src_compile() {
+#	emake canfestival
+#    use examples && emake examples
+#	use objdictedit && emake objdictedit
+#}
 
 src_install() {
 	make install || die

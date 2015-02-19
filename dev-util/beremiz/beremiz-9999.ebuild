@@ -33,7 +33,7 @@ RDEPEND="dev-python/wxpython:2.8
 		dev-util/wxglade
 		dev-python/pyro:3
 		dev-lang/matiec
-		canfestival? ( sys-apps/canfestival \
+		canfestival? ( dev-libs/canfestival \
 		               dev-python/gnosis-utils )
 		twisted? ( dev-python/twisted-core )"
 
