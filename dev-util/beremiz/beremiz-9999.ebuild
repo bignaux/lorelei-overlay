@@ -27,9 +27,9 @@ KEYWORDS=""
 IUSE="canfestival doc +twisted"
 
 RDEPEND="
-		canfestival? ( dev-libs/canfestival \
+		canfestival? ( dev-libs/canfestival
 		               dev-python/gnosis-utils )
-		twisted? ( dev-python/twisted-core \
+		twisted? ( dev-python/twisted-core
 		           dev-python/autobahn  )
 		dev-lang/matiec
         dev-python/wxpython:2.8
@@ -38,6 +38,12 @@ RDEPEND="
     	dev-python/pyro:3
 		dev-python/simplejson
 		dev-util/wxglade"
+
+DEPEND="${RDEPEND}
+	doc? (
+		dev-python/sphinx
+		dev-python/sphinx-better-theme
+	)"
 
 src_prepare() {
     epatch "${FILESDIR}/beremiz-fix-wxversion.patch"
@@ -57,7 +63,11 @@ src_install() {
 	newicon "images/brz.png" "${PN}.png"
     make_desktop_entry /usr/bin/beremiz "Beremiz" "${PN}" "Development"
 
-	if use doc; then
-		dohtml -r doc/*
-	fi
+#	if use doc; then
+#		docinto doc
+#		dodoc doc/{index.rst,overview.rst,standards.rst}
+#		docinto manual
+#		dodoc doc/manual/{build.rst,debug.rst,edit.rst,index.rst,install.rst,start.rst}
+#		#dohtml -r doc/*
+#	fi
 }
