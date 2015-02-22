@@ -48,6 +48,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
     epatch "${FILESDIR}/beremiz-fix-wxversion.patch"
+    epatch "${FILESDIR}/beremiz-fix-path.patch"
 }
 
 src_install() {
