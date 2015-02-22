@@ -37,6 +37,7 @@ RDEPEND="
         dev-python/numpy
     	dev-python/pyro:3
 		dev-python/simplejson
+		dev-python/lxml
 		dev-util/wxglade"
 
 DEPEND="${RDEPEND}
