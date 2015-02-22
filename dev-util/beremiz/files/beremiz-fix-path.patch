@@ -1,0 +1,24 @@
+# HG changeset patch
+# User Ronan Bignaux <r.bignaux@rbi.io>
+# Date 1424620858 -3600
+#      Sun Feb 22 17:00:58 2015 +0100
+# Node ID cc58222baa27cdaa84d474de90389b325bf091d2
+# Parent  5f09fa31d7b02c01e8b33dec1a97204a8a98c947
+Quick and dirty path fix
+
+diff -r 5f09fa31d7b0 -r cc58222baa27 ProjectController.py
+--- a/ProjectController.py	Sat Feb 21 10:20:24 2015 +0100
++++ b/ProjectController.py	Sun Feb 22 17:00:58 2015 +0100
+@@ -115,9 +115,9 @@
+         self.DebugTicks = []
+         self.SetAppFrame(frame, logger)
+ 
+-        self.iec2c_path = os.path.join(base_folder, "matiec", "iec2c"+(".exe" if wx.Platform == '__WXMSW__' else ""))
+-        self.ieclib_path = os.path.join(base_folder, "matiec", "lib")
+-        self.ieclib_c_path = os.path.join(base_folder, "matiec", "lib", "C")
++        self.iec2c_path = 'iec2c'
++        self.ieclib_path = '/usr/share/matiec/lib'
++        self.ieclib_c_path = '/usr/share/matiec/lib/C'
+ 
+         # Setup debug information
+         self.IECdebug_datas = {}
