@@ -1,0 +1,21 @@
+# HG changeset patch
+# User Ronan Bignaux <r.bignaux@rbi.io>
+# Date 1424634096 -3600
+#      Sun Feb 22 20:41:36 2015 +0100
+# Node ID f15367ef2baaad2b93b1491392f6396380719cf0
+# Parent  396a7836124856d5e90c55213af489901d463524
+Beremiz_service.py : fix PYRO daemon shutdown
+
+diff -r 396a78361248 -r f15367ef2baa Beremiz_service.py
+--- a/Beremiz_service.py	Sun Feb 22 20:41:07 2015 +0100
++++ b/Beremiz_service.py	Sun Feb 22 20:41:36 2015 +0100
+@@ -419,7 +419,8 @@
+         if self.servicepublisher is not None:
+             self.servicepublisher.UnRegisterService()
+             self.servicepublisher = None
+-        self.daemon.shutdown(True)
++        if self.daemon is not None:
++            self.daemon.shutdown(True)
+ 
+ if enabletwisted:
+     import warnings

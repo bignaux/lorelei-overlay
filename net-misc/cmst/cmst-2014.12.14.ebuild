@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit multilib qt5-build
+inherit multilib qt4-r2
 
 DESCRIPTION="QT GUI for Connman with system tray icon"
 HOMEPAGE="https://github.com/andrew-bibb/cmst"
@@ -27,10 +27,16 @@ IUSE=""
 DEPEND="dev-qt/qtcore:5"
 RDEPEND="net-misc/connman
 		${DEPEND}"
+		
+S="${WORKDIR}/cmst-cmst-2014.12.14"
+
+src_configure() {
+	eqmake5 ${PN}.pro
+}
 
 src_install() {
 	exeinto /usr/bin
-	doexe ${WORKDIR}/cmst-opensource-src-${PV}/apps/cmstapp/cmst || die "doexe failed"
+	doexe ${S}/apps/cmstapp/cmst || die "doexe failed"
 	doman ${S}/misc/manpage/${PN}.1
 	newicon -s 24 ${S}/images/application/variations/cmst_button01.png cmst.png 
 	domenu ${S}/misc/desktop/${PN}.desktop
