@@ -38,6 +38,12 @@ DEPEND="virtual/libusb:0
 		"
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	# remove bugged 3-rd party
+	# should not git submodules!
+	rm -fr vendor/rtmidi/
+}
+
 src_configure() {
 	eqmake5 all.pro
 }
