@@ -1,9 +1,8 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: 
+# $Header:
 
 EAPI=5
-
 inherit qmake-utils
 
 DESCRIPTION="Digital rythmo band system for dubbing and postsynchronisation purposes."
@@ -22,26 +21,33 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="libav"
 
-# add ffmpeg[]
-# media-video/libav
-DEPEND="virtual/libusb:0
-		dev-qt/qtcore:5
-		dev-qt/qtgui:5
-		media-libs/rtmidi
-		media-libs/portaudio
-		media-libs/libltc
-		media-libs/libsdl2
-		media-libs/sdl2-ttf
-		media-libs/sdl2-image
+# TODO :
+# * complete ffmpeg[] libvo-aacenc,
+# ,ffplay,freetype,frei0r,libass,\
+# 			libcaca,vorbis,vpx,openjpeg,openssl,opus,rtmp,schroedinger,\
+# 			speex,theora,tools]
+# # others qt5
+RDEPEND="
+        	libav? ( >=media-video/libav-10:0=[aac] )
+        	!libav? ( >=media-video/ffmpeg-2.1.4:0=[aac] )
+        	dev-qt/qtcore:5
+        	dev-qt/qtgui:5
+        	media-libs/libltc
+        	media-libs/libsdl2
+        	media-libs/portaudio
+        	media-libs/rtmidi
+        	media-libs/sdl2-image
+        	media-libs/sdl2-ttf
 		"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}"
 
 src_prepare() {
-	# remove bugged 3-rd party
+      epatch "${FILESDIR}/libasound.patch"
+      # TODO remove bugged 3-rd party
 	# should not git submodules!
-	rm -fr vendor/rtmidi/
+	# rm -fr vendor/rtmidi/
 }
 
 src_configure() {

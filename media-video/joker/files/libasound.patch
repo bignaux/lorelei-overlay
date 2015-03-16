@@ -1,0 +1,12 @@
+diff --git a/libs/PhCommonUI/PhCommonUI.pri b/libs/PhCommonUI/PhCommonUI.pri
+index e9b994a..c8e8e6d 100644
+--- a/libs/PhCommonUI/PhCommonUI.pri
++++ b/libs/PhCommonUI/PhCommonUI.pri
+@@ -50,6 +50,7 @@ win32 {
+ 
+ # Ubuntu specific
+ linux {
++LIBS += -lasound
+ #LIBS += -L$$(LEAP_SDK)/lib/x64 -lLeap
+ }
+ 
