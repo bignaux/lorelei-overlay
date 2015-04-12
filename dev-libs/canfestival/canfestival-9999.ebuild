@@ -8,7 +8,6 @@ inherit toolchain-funcs
 
 DESCRIPTION="ANSI-C platform independent CANOpen stack"
 HOMEPAGE="http://www.canfestival.org/"
-EHG_REPO_URI_BASE="http://dev.automforge.net"
 MY_PN="CanFestival-3"
 S="${WORKDIR}/${MY_PN}"
 
