@@ -9,3 +9,21 @@ dev-util/plcopeneditor
 dev-libs/canfestival
 dev-util/modelio
 net-p2p/cpp-ethereum
+# required by dev-java/swt-3.8.2-r1::gentoo[webkit]
+# required by dev-java/piccolo2d-3.0-r1::gentoo
+# required by app-text/tesseract-3.04.00-r4::gentoo[scrollview]
+# required by @selected
+# required by @world (argument)
+# /etc/portage/package.mask/package.mask:
+#too long (TODO : move in another place)
+=net-libs/webkit-gtk-2.4.9-r200
+# required by @__auto_slot_operator_replace_installed__ (argument)
+# /etc/portage/package.mask/package.mask:
+#too long (TODO : move in another place)
+=net-libs/webkit-gtk-2.4.9
+# required by @selected
+# required by @world (argument)
+# /etc/portage/package.mask/package.mask:
+### manual updates
+#sys-kernel/gentoo-sources
+=app-office/libreoffice-5.0.4.2

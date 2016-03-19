@@ -4,10 +4,12 @@
 
 EAPI=5
 
-inherit cmake-utils
+inherit cmake-utils versionator
 
 DESCRIPTION="Vehicle diagnostic protocols and an OBD II (mostly) compliant ScanTool."
 HOMEPAGE="http://freediag.sourceforge.net/"
+
+MY_PV=R$(replace_version_separator 1 '_')
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -16,8 +18,9 @@ IUSE="fltk"
 
 DEPEND="fltk? ( x11-libs/fltk:1 )"
 
-SRC_URI="https://github.com/fenugrec/freediag/archive/R1_05.tar.gz"
-S=${WORKDIR}/freediag-R1_05
+
+SRC_URI="https://github.com/fenugrec/freediag/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+S=${WORKDIR}/freediag-${MY_PV}
 
 src_prepare() {
     if use fltk ; then
