@@ -1,0 +1,8 @@
+# Mass-masking of live ebuilds; we cannot guarantee working state of
+# live ebuilds, nor the availability of the server hosting them. As
+# per QA team policy, all these need to be kept masked by default, if
+# available in the tree.
+
+=dev-lang/matiec-9999
+=dev-util/beremiz-9999
+=dev-libs/canfestival-9999
