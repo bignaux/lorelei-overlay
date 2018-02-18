@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="a framework for building document analysis applications."
 HOMEPAGE="http://gamera.informatik.hsnr.de"
-SRC_URI="mirror://sourceforge/project/gamera/gamera/${P}/${P}.tar.gz"
+SRC_URI="https://github.com/hsnr-gamera/gamera/releases/download/${PV}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 IUSE=""
@@ -18,5 +18,5 @@ KEYWORDS="~amd64 ~x86"
 
 RDEPENDS="dev-python/wxpython
     media-libs/libpng
-    python-docutils 
+    python-docutils
     python-pygments"
